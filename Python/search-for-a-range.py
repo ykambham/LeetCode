@@ -2,11 +2,11 @@
 # Space: O(1)
 #
 # Given a sorted array of integers, find the starting and ending position of a given target value.
-# 
+#
 # Your algorithm's runtime complexity must be in the order of O(log n).
-# 
+#
 # If the target is not found in the array, return [-1, -1].
-# 
+#
 # For example,
 # Given [5, 7, 7, 8, 8, 10] and target value 8,
 # return [3, 4].
@@ -19,14 +19,14 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        # Find the first index where target <= nums[idx]
+        # Find the first idx where nums[idx] >= target
         left = self.binarySearch(lambda x, y: x >= y, nums, target)
         if left >= len(nums) or nums[left] != target:
             return [-1, -1]
-        # Find the first index where target < nums[idx]
+        # Find the first idx where nums[idx] > target
         right = self.binarySearch(lambda x, y: x > y, nums, target)
         return [left, right - 1]
-    
+
     def binarySearch(self, compare, nums, target):
         left, right = 0, len(nums)
         while left < right:
@@ -55,7 +55,7 @@ class Solution(object):
                 right = mid
             else:
                 left = mid
-        return right
+        return left if left != -1 and compare(nums[left], target) else right
 
 
 if __name__ == "__main__":

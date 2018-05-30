@@ -12,9 +12,13 @@ public:
         int sign = 1;
         int i = 0;
 
-        // Skip ' '.
-        while (str[i] == ' ') {
+        // Skip whitespace.
+        while (str[i] == ' ' || str[i] == '\t') {
             ++i;
+        }
+
+        if (i == str.length()) {
+            return 0;
         }
 
         // Parse sign.
